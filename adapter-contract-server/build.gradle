@@ -10,16 +10,15 @@ dependencies {
     compileOnly "org.openapitools:jackson-databind-nullable:$jacksonDatabindVersion"
 }
 
-
 openApiGenerate {
     generatorName = "spring"
 
-    inputSpec = "$projectDir/../opendatadiscovery-specification/specification/odd_api.yaml"
+    inputSpec = "$projectDir/../opendatadiscovery-specification/specification/odd_adapter.yaml"
     outputDir = "$buildDir/generated"
 
-    apiPackage = "org.opendatadiscovery.oddplatform.ingestion.contract.api"
-    invokerPackage = "org.opendatadiscovery.oddplatform.ingestion.contract"
-    modelPackage = "org.opendatadiscovery.oddplatform.ingestion.contract.model"
+    apiPackage = "org.opendatadiscovery.adapter.contract.api"
+    invokerPackage = "org.opendatadiscovery.adapter.contract"
+    modelPackage = "org.opendatadiscovery.adapter.contract.model"
 
     configOptions = [
         dateLibrary  : "java8",

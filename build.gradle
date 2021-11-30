@@ -1,0 +1,118 @@
+plugins {
+  id 'org.openapi.generator' version '5.2.0' apply false
+}
+
+ext {
+    env = findProperty('env') ?: 'dev'
+}
+
+subprojects {
+
+    apply plugin: 'java-library'
+    apply plugin: 'maven-publish'
+    apply plugin: 'signing'
+    apply plugin: 'org.openapi.generator'
+
+    group = 'org.opendatadiscovery'
+    version = version
+
+    repositories {
+        mavenCentral()
+        mavenLocal()
+    }
+
+    java {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+    }
+
+    sourceSets {
+        main {
+            java {
+                srcDir "$buildDir/generated/src/main/java"
+            }
+        }
+    }
+
+    task sourceJar(type: Jar) {
+        classifier "sources"
+        from sourceSets.main.allJava
+    }
+
+    task javadocJar(type: Jar, dependsOn: javadoc) {
+        classifier "javadoc"
+        from javadoc.destinationDir
+    }
+
+    artifacts {
+        archives sourceJar, javadocJar
+    }
+
+    if (env == 'prod') {
+        signing {
+            sign(publishing.publications)
+        }
+    }
+
+    publishing {
+        if (env == 'prod') {
+            repositories {
+                maven {
+                    url "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2"
+                    credentials {
+                        username sonatypeUsername
+                        password sonatypePassword
+                    }
+                }
+            }
+        }
+
+        publications {
+            contract(MavenPublication) {
+                groupId = 'org.opendatadiscovery'
+                version = version
+
+                from components.java
+
+                artifact(sourceJar) {
+                    classifier = 'sources'
+                }
+
+                artifact(javadocJar) {
+                    classifier = 'javadoc'
+                }
+
+                pom {
+                    name = 'ODD Platform Ingestion Contract'
+                    description = 'ODD Platform Java package with OpenDataDiscovery models and APIs'
+                    url = 'https://github.com/opendatadiscovery/odd-platform-ingestion-contract'
+
+                    licenses {
+                        license {
+                            name = 'The Apache License, Version 2.0'
+                            url = 'https://www.apache.org/licenses/LICENSE-2.0.txt'
+                        }
+                    }
+
+                    developers {
+                        developer {
+                            id = 'ndementev'
+                            name = 'Nikita Dementev'
+                            organization = 'opendatadiscovery.org'
+                        }
+                    }
+
+                    scm {
+                        connection = 'scm:git:git://github.com/opendatadiscovery/odd-platform-ingestion-contract.git'
+                        developerConnection = 'scm:git:git://github.com/opendatadiscovery/odd-platform-ingestion-contract.git'
+                        url = 'https://github.com/opendatadiscovery/odd-platform-ingestion-contract'
+                    }
+                }
+            }
+        }
+    }
+
+    compileJava.dependsOn tasks.openApiGenerate
+    publish.dependsOn tasks.compileJava    
+
+}

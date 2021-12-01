@@ -16,7 +16,7 @@ subprojects {
     apply plugin: 'org.openapi.generator'
 
     group = 'org.opendatadiscovery'
-    version = version
+    version = file('VERSION').text
 
     repositories {
         mavenCentral()

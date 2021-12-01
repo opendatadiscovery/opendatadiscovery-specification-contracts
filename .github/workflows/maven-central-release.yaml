@@ -28,7 +28,7 @@ jobs:
           git submodule foreach git pull origin main
           git checkout .gitmodules
       - name: Build and publish maven package
-        run: ./gradlew --no-daemon -PsonatypeUsername=${{ secrets.sonatypeUsername }} --PsonatypePassword=${{ secrets.sonatypePassword }} -Penv=prod clean publishToSonatype closeAndReleaseSonatypeStagingRepository
+        run: ./gradlew --no-daemon -PsonatypeUsername=${{ secrets.SONATYPE_USERNAME }} --PsonatypePassword=${{ secrets.SONATYPE_PASSWORD }} -Penv=prod clean publishToSonatype closeAndReleaseSonatypeStagingRepository
 
       - name: Update repository with up-to-date submodules and version
         run: |

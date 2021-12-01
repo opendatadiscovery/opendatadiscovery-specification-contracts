@@ -1,4 +1,3 @@
-
 dependencies {
     implementation "io.swagger:swagger-annotations:$swaggerAnnotationsVersion"
     implementation "com.google.code.findbugs:jsr305:3.0.2"
@@ -12,7 +11,6 @@ dependencies {
     implementation "org.openapitools:jackson-databind-nullable:$jacksonDatabindNullableVersion"
     implementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonVersion"
     implementation "jakarta.annotation:jakarta.annotation-api:$jakartaAnnotationVersion"
-    testImplementation "junit:junit:$junitVersion"
 }
 
 openApiGenerate {
@@ -35,4 +33,15 @@ openApiGenerate {
         models         : "",
         apis           : ""
     ]
+}
+
+publishing {
+    publications {
+        maven {
+            pom {
+                name = 'Ingestion Contract Client'
+                description = 'Ingestion Contract Client defines OpenDataDiscovery APIs and models for HTTP Java client'
+            }
+        }
+    }
 }

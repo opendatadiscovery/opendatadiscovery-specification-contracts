@@ -1,15 +1,4 @@
-pluginManagement {
-    repositories {
-        gradlePluginPortal()
-        mavenCentral()
-        maven {
-            name "JCenter Gradle Plugins"
-            url  "https://dl.bintray.com/gradle/gradle-plugins"
-        }
-    }
-}
-
-rootProject.name = 'opendatadiscovery-specificattoin-contracts'
+rootProject.name = 'opendatadiscovery-specification-contracts'
 
 include 'ingestion-contract-client'
 include 'ingestion-contract-server'

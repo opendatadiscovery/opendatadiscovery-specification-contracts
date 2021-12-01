@@ -8,6 +8,7 @@ ext {
 }
 
 group = 'org.opendatadiscovery'
+packageVersion = file('VERSION').text
 
 subprojects {
     apply plugin: 'java-library'
@@ -16,7 +17,7 @@ subprojects {
     apply plugin: 'org.openapi.generator'
 
     group = 'org.opendatadiscovery'
-    version = file('VERSION').text
+    version = packageVersion
 
     repositories {
         mavenCentral()

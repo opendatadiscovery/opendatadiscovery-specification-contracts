@@ -1,4 +1,3 @@
-
 dependencies {
     compileOnly "org.springframework.boot:spring-boot-starter-webflux:$springWebfluxVersion"
 
@@ -32,4 +31,15 @@ openApiGenerate {
         models         : "",
         apis           : ""
     ]
+}
+
+publishing {
+    publications {
+        maven {
+            pom {
+                name = 'Adapter Server Contract'
+                description = 'Adapter Server Contract defines OpenDataDiscovery APIs and models for Java pull adapters'
+            }
+        }
+    }
 }

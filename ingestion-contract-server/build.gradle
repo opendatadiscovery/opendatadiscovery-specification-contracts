@@ -1,4 +1,3 @@
-
 dependencies {
     compileOnly "org.springframework.boot:spring-boot-starter-webflux:$springWebfluxVersion"
 
@@ -33,4 +32,15 @@ openApiGenerate {
         models         : "",
         apis           : ""
     ]
+}
+
+publishing {
+    publications {
+        maven {
+            pom {
+                name = 'Ingestion Contract Server'
+                description = 'Ingestion Contract Server defines OpenDataDiscovery APIs and models for receiving ingestion data'
+            }
+        }
+    }
 }

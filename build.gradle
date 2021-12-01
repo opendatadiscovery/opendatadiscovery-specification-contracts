@@ -1,20 +1,22 @@
 plugins {
-  id 'org.openapi.generator' version '5.2.0' apply false
+    id 'org.openapi.generator' version '5.2.0' apply false
+    id 'io.github.gradle-nexus.publish-plugin' version '1.1.0'
 }
 
 ext {
     env = findProperty('env') ?: 'dev'
 }
 
-subprojects {
+group = 'org.opendatadiscovery'
 
+subprojects {
     apply plugin: 'java-library'
     apply plugin: 'maven-publish'
     apply plugin: 'signing'
     apply plugin: 'org.openapi.generator'
 
     group = 'org.opendatadiscovery'
-    version = version
+    version = file('VERSION').text
 
     repositories {
         mavenCentral()
@@ -22,8 +24,8 @@ subprojects {
     }
 
     java {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
 
     sourceSets {
@@ -68,8 +70,8 @@ subprojects {
         }
 
         publications {
-            contract(MavenPublication) {
-                groupId = 'org.opendatadiscovery'
+            maven(MavenPublication) {
+                groupId = group
                 version = version
 
                 from components.java
@@ -83,9 +85,7 @@ subprojects {
                 }
 
                 pom {
-                    name = 'ODD Platform Ingestion Contract'
-                    description = 'ODD Platform Java package with OpenDataDiscovery models and APIs'
-                    url = 'https://github.com/opendatadiscovery/odd-platform-ingestion-contract'
+                    url = 'https://github.com/opendatadiscovery/opendatadiscovery-specification-contracts'
 
                     licenses {
                         license {
@@ -100,12 +100,17 @@ subprojects {
                             name = 'Nikita Dementev'
                             organization = 'opendatadiscovery.org'
                         }
+                        developer {
+                            id = 'gosin'
+                            name = 'German Osin'
+                            organization = 'opendatadiscovery.org'
+                        }
                     }
 
                     scm {
-                        connection = 'scm:git:git://github.com/opendatadiscovery/odd-platform-ingestion-contract.git'
-                        developerConnection = 'scm:git:git://github.com/opendatadiscovery/odd-platform-ingestion-contract.git'
-                        url = 'https://github.com/opendatadiscovery/odd-platform-ingestion-contract'
+                        connection = 'scm:git:git://github.com/opendatadiscovery/opendatadiscovery-specification-contracts.git'
+                        developerConnection = 'scm:git:git://github.com/opendatadiscovery/opendatadiscovery-specification-contracts.git'
+                        url = 'https://github.com/opendatadiscovery/opendatadiscovery-specification-contracts'
                     }
                 }
             }
@@ -113,6 +118,17 @@ subprojects {
     }
 
     compileJava.dependsOn tasks.openApiGenerate
-    publish.dependsOn tasks.compileJava    
+    publish.dependsOn tasks.compileJava
+}
 
+nexusPublishing {
+    repositories {
+        sonatype {
+            nexusUrl = uri("https://s01.oss.sonatype.org/service/local/")
+            snapshotRepositoryUrl = uri("https://s01.oss.sonatype.org/content/repositories/snapshots/")
+
+            username = sonatypeUsername
+            password = sonatypePassword
+        }
+    }
 }

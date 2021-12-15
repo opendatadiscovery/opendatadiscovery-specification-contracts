@@ -2,7 +2,7 @@ dependencies {
     implementation "io.swagger:swagger-annotations:$swaggerAnnotationsVersion"
     implementation "com.google.code.findbugs:jsr305:3.0.2"
     implementation "io.projectreactor:reactor-core:$reactorVersion"
-    implementation "org.springframework.boot:spring-boot-starter-webflux:$springWebVersion"
+    implementation "org.springframework.boot:spring-boot-starter-webflux:$springWebfluxVersion"
     implementation "io.projectreactor.ipc:reactor-netty:$reactorNettyVersion"
     implementation "com.fasterxml.jackson.core:jackson-core:$jacksonVersion"
     implementation "com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion"

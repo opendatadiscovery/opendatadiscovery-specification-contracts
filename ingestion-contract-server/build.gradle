@@ -6,7 +6,7 @@ dependencies {
     compileOnly "io.swagger:swagger-annotations:$swaggerAnnotationsVersion"
 
     compileOnly "io.springfox:springfox-boot-starter:$springfoxBootStarterVersion"
-    compileOnly "org.openapitools:jackson-databind-nullable:$jacksonDatabindVersion"
+    compileOnly "org.openapitools:jackson-databind-nullable:$jacksonDatabindNullableVersion"
 }
 
 

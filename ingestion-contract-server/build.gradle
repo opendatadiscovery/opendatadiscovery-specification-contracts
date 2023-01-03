@@ -24,6 +24,7 @@ openApiGenerate {
         dateLibrary  : "java8",
         reactive     : "true",
         interfaceOnly: "true",
+        useBeanValidation: "false",
     ]
 
     globalProperties = [

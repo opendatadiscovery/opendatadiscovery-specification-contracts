@@ -1,4 +1,5 @@
 rootProject.name = 'opendatadiscovery-specification-contracts'
 
 include 'ingestion-contract-client'
+include 'ingestion-contract-client-native'
 include 'ingestion-contract-server'

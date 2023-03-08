@@ -1,0 +1,41 @@
+dependencies {
+    implementation "com.fasterxml.jackson.core:jackson-core:2.11.2"
+    implementation "com.fasterxml.jackson.core:jackson-annotations:2.11.2"
+    implementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.11.2"
+    implementation "org.openapitools:jackson-databind-nullable:0.2.2"
+    implementation "io.swagger:swagger-annotations:1.5.23"
+    implementation "com.google.code.findbugs:jsr305:3.0.2"
+}
+
+openApiGenerate {
+    generatorName = "java"
+
+    inputSpec = "$projectDir/../opendatadiscovery-specification/specification/odd_api.yaml"
+    outputDir = "$buildDir/generated"
+
+    apiPackage = "org.opendatadiscovery.client.api"
+    invokerPackage = "org.opendatadiscovery.client"
+    modelPackage = "org.opendatadiscovery.client.model"
+
+    configOptions = [
+        dateLibrary: "java8",
+        library    : "native"
+    ]
+
+    globalProperties = [
+        supportingFiles: "",
+        models         : "",
+        apis           : ""
+    ]
+}
+
+publishing {
+    publications {
+        maven {
+            pom {
+                name = 'Ingestion Contract Native Client'
+                description = 'Ingestion Contract Client defines OpenDataDiscovery APIs and models for native HTTP Java client'
+            }
+        }
+    }
+}

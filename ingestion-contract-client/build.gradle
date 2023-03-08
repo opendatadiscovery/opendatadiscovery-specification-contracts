@@ -13,6 +13,11 @@ dependencies {
     implementation "jakarta.annotation:jakarta.annotation-api:$jakartaAnnotationVersion"
 }
 
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
 openApiGenerate {
     generatorName = "java"
 
@@ -39,8 +44,8 @@ publishing {
     publications {
         maven {
             pom {
-                name = 'Ingestion Contract Client'
-                description = 'Ingestion Contract Client defines OpenDataDiscovery APIs and models for HTTP Java client'
+                name = 'Ingestion Contract WebFlux Client'
+                description = 'Ingestion Contract WebFlux Client defines OpenDataDiscovery APIs and models for Spring WebClient'
             }
         }
     }

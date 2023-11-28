@@ -34,7 +34,12 @@ jobs:
           echo '${{ secrets.SIGNING_SECRET_KEY }}' > /tmp/secret_key_base64
           base64 -d /tmp/secret_key_base64 > /tmp/secret_key.gpg
 
-
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: 'gradle'
       - name: Build and publish maven package
         run: ./gradlew --no-daemon
           -PsonatypeUsername=${{ secrets.SONATYPE_USERNAME }}

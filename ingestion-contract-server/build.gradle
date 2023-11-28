@@ -1,12 +1,10 @@
 dependencies {
     compileOnly "org.springframework.boot:spring-boot-starter-webflux:$springWebfluxVersion"
-
-    compileOnly "javax.validation:validation-api:$validationApiVersion"
-    compileOnly "javax.annotation:javax.annotation-api:$annotationApiVersion"
-    compileOnly "io.swagger:swagger-annotations:$swaggerAnnotationsVersion"
-
-    compileOnly "io.springfox:springfox-boot-starter:$springfoxBootStarterVersion"
+    compileOnly "jakarta.validation:jakarta.validation-api:$validationApiVersion"
+    compileOnly "jakarta.annotation:jakarta.annotation-api:$annotationApiVersion"
     compileOnly "org.openapitools:jackson-databind-nullable:$jacksonDatabindNullableVersion"
+    compileOnly "io.swagger.core.v3:swagger-annotations:$swaggerAnnotationsVersion"
+    compileOnly "io.springfox:springfox-core:$springfoxBootStarterVersion"
 }
 
 
@@ -25,6 +23,7 @@ openApiGenerate {
         reactive     : "true",
         interfaceOnly: "true",
         useBeanValidation: "false",
+        useSpringBoot3: "true"
     ]
 
     globalProperties = [
